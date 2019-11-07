@@ -1,0 +1,31 @@
+  
+stages:
+  - test
+  - name: deploy
+    if: branch = master
+
+language: node_js
+
+node_js:
+  - "stable"
+
+before_script:
+  - npm install
+
+cache:
+  directories:
+  - node_modules
+
+jobs:
+  include:
+    - stage: test
+      script: npm run test
+    - stage: deploy
+      script: npm run build
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $github_token
+        local_dir: build
+        on:
+          branch: master

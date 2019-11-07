@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Search from './Search';
+import List from './List';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentPage: <Search onClickSearch={this.changeToList} handleInputChange={this.handleInputChange} />,
+      query: ""
+    }
+  }
+
+  changeToList = () => {
+    if (this.state.query.length > 0)
+      this.setState({ currentPage: <List query={this.state.query} onClickBack={this.changeToSearch} sendInputToParent={this.handleInputChange} /> })
+    else
+      alert("Please input search query")
+  }
+
+  changeToSearch = () => {
+    this.setState({
+      query: "",
+      currentPage: <Search onClickSearch={this.changeToList} handleInputChange={this.handleInputChange} />
+    })
+  }
+
+  handleInputChange = (e) => {
+    this.setState({
+      query: e.target.value
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        {this.state.currentPage}
+      </div >
+    );
+  }
 }
 
 export default App;
