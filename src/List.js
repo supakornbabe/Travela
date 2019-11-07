@@ -109,8 +109,10 @@ class List extends React.Component {
                   <div class="row">
                     <div class="col-md-12">
                       <div class="search_bar_list">
-                        <input type="text" class="form-control" placeholder={this.state.query} onChange={this.handleInputChange} />
-                        <input type="submit" value="Search" onClick={() => this.handleSearchWithPage(1)} />
+                        <form>
+                          <input class="form-control" placeholder={this.state.query} onChange={this.handleInputChange} />
+                          <input type="submit" value="Search" onClick={() => this.handleSearchWithPage(1)} />
+                        </form>
                       </div>
                     </div>
                   </div>

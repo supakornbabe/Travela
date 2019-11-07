@@ -14,7 +14,7 @@ class Search extends React.Component {
                     <p>
                         The world is yours.
 				    </p>
-                    <form method="post" action="list.html">
+                    <form>
                         <div id="custom-search-input">
                             <div class="input-group">
                                 <input className=" search-query" placeholder="Ex. City, Location ...." onChange={this.props.handleInputChange}></input>
