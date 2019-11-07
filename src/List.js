@@ -121,21 +121,12 @@ class List extends React.Component {
                     )}
                     <nav aria-label="" class="add_top_20">
                       <ul class="pagination pagination-sm">
-                        {/* <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">Next</a>
-                        </li> */}
                         <li class={this.state.page <= 1 ? "page-item disabled" : "page-item"}>
-                          <a class="page-link" onClick={() => { this.handleSearchWithPage(this.state.page - 1); this.setState({ page: this.state.page - 1 }) }}>Previous</a>
+                          <button class="page-link" onClick={() => { this.handleSearchWithPage(this.state.page - 1); this.setState({ page: this.state.page - 1 }) }}>Previous</button>
                         </li>
-                        {numberList().map(n => <li class={this.state.page === n ? "page-item active" : "page-item"}><a class="page-link" onClick={() => { this.handleSearchWithPage(n); this.setState({ page: n }) }}>{n}</a></li>)}
+                        {numberList().map(n => <li class={this.state.page === n ? "page-item active" : "page-item"}><button class="page-link" onClick={() => { this.handleSearchWithPage(n); this.setState({ page: n }) }}>{n}</button></li>)}
                         <li class={this.state.page >= Math.floor(this.state.total / 10) ? "page-item disabled" : "page-item"}>
-                          <a class="page-link" onClick={() => { this.handleSearchWithPage(this.state.page + 1); this.setState({ page: this.state.page + 1 }) }}>Next</a>
+                          <button class="page-link" onClick={() => { this.handleSearchWithPage(this.state.page + 1); this.setState({ page: this.state.page + 1 }) }}>Next</button>
                         </li>
                       </ul>
                     </nav>
