@@ -47,7 +47,7 @@ class List extends React.Component {
         hits: response.data.hits.hits,
         total: response.data.hits.total,
         ready: true,
-        page:n
+        page: n
       })
     })
   }

@@ -13,7 +13,7 @@ class Search extends React.Component {
                     <h3>Travela!</h3>
                     <p>
                         The world is yours.
-				        </p>
+				    </p>
                     <form method="post" action="list.html">
                         <div id="custom-search-input">
                             <div class="input-group">
