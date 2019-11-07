@@ -1,6 +1,5 @@
   
 stages:
-  - test
   - name: deploy
     if: branch = master
 
@@ -18,8 +17,6 @@ cache:
 
 jobs:
   include:
-    - stage: test
-      script: npm run test
     - stage: deploy
       script: npm run build
       deploy:
