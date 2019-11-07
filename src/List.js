@@ -54,7 +54,14 @@ class List extends React.Component {
   render() {
     const numberList = () => {
       let number = []
-      if (this.state.page > 4) {
+      if (this.state.total / 10 < 7) {
+        let round = Math.ceil(this.state.total / 10)
+        for (let i = 1; i <= round; i++) {
+          number.push(i)
+          console.log(i)
+        }
+      }
+      else if (this.state.page > 4) {
         number = [
           this.state.page - 3,
           this.state.page - 2,
@@ -125,7 +132,7 @@ class List extends React.Component {
                           <button class="page-link" onClick={() => { this.handleSearchWithPage(this.state.page - 1); this.setState({ page: this.state.page - 1 }) }}>Previous</button>
                         </li>
                         {numberList().map(n => <li class={this.state.page === n ? "page-item active" : "page-item"}><button class="page-link" onClick={() => { this.handleSearchWithPage(n); this.setState({ page: n }) }}>{n}</button></li>)}
-                        <li class={this.state.page >= Math.floor(this.state.total / 10) ? "page-item disabled" : "page-item"}>
+                        <li class={this.state.page > Math.floor(this.state.total / 10) ? "page-item disabled" : "page-item"}>
                           <button class="page-link" onClick={() => { this.handleSearchWithPage(this.state.page + 1); this.setState({ page: this.state.page + 1 }) }}>Next</button>
                         </li>
                       </ul>
