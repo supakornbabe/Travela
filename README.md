@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/supakornbabe/Travela.svg?branch=master)](https://travis-ci.com/supakornbabe/Travela)
+![Build Status](https://github.com/supakornbabe/travela/workflows/Build%20and%20Deploy%20Github%20Page/badge.svg)
 
 ## About Project
 
