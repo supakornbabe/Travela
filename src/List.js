@@ -71,7 +71,7 @@ const List = props => {
       }
     }
     setReady(false)
-    axios.post('http://35.240.242.187:9200/nutch/_search', body).then(response => {
+    axios.post('http://35.240.201.99:9200/nutch/_search', body).then(response => {
       setHITS(response.data.hits.hits)
       setTotal(response.data.hits.total)
       setReady(true)
