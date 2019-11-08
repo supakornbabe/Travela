@@ -136,7 +136,8 @@ const List = props => {
                       </small>
                       <a
                         href={p._source.url}
-                       
+                        // eslint-disable-next-line 
+                        target="_blank"
                       >
                         <h3>
                           {p._source.title}
