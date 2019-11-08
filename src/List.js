@@ -21,6 +21,7 @@ class List extends React.Component {
       query: e.target.value
     })
   }
+
   handleSearchWithPage = (n) => {
     let body = {
       "from": 10 * (n - 1), "size": 10,
@@ -42,7 +43,7 @@ class List extends React.Component {
     this.setState({
       ready: false
     })
-    axios.post('http://35.247.134.8:9200/nutch/_search', body).then(response => {
+    axios.post('http://35.240.242.187:9200/nutch/_search', body).then(response => {
       this.setState({
         hits: response.data.hits.hits,
         total: response.data.hits.total,
@@ -51,25 +52,27 @@ class List extends React.Component {
       })
     })
   }
+
   render() {
     const numberList = () => {
-      let number = []
-      if (this.state.total / 10 < 7) {
-        let round = Math.ceil(this.state.total / 10)
+      let number = [];
+      let total = this.state.total;
+      let page = this.state.page;
+      if (total / 10 < 7) {
+        let round = Math.ceil(total / 10)
         for (let i = 1; i <= round; i++) {
           number.push(i)
-          console.log(i)
         }
       }
-      else if (this.state.page > 4) {
+      else if (page > 4) {
         number = [
-          this.state.page - 3,
-          this.state.page - 2,
-          this.state.page - 1,
-          this.state.page,
-          this.state.page + 1,
-          this.state.page + 2,
-          this.state.page + 3
+          page - 3,
+          page - 2,
+          page - 1,
+          page,
+          page + 1,
+          page + 2,
+          page + 3
         ]
       }
       else {
@@ -77,26 +80,36 @@ class List extends React.Component {
       }
       return number
     }
+
     let trimByWord = (sentence) => {
-      let numberOfWord = 100
+      let wordLength = 100
       var result = sentence;
       var resultArray = result.split(" ");
-      if (resultArray.length > numberOfWord) {
-        resultArray = resultArray.slice(0, numberOfWord);
+      if (resultArray.length > wordLength) {
+        resultArray = resultArray.slice(0, wordLength);
         result = resultArray.join(" ") + "...";
       }
       return result;
     }
+
     return (
       <>
         {this.state.ready ?
           <div>
+
             <header class="static">
               <div class="container">
                 <div class="row">
                   <div class="col-sm">
                     <div id="logo">
-                      <img src="img/Travela.png" data-retina="true" alt="" width="auto" height="40 px" onClick={this.props.onClickBack} />
+                      <img
+                        src="img/Travela.png"
+                        data-retina="true"
+                        alt=""
+                        width="auto"
+                        height="40 px"
+                        onClick={this.props.onClickBack}
+                      />
                     </div>
                   </div>
                 </div>
@@ -110,8 +123,16 @@ class List extends React.Component {
                     <div class="col-md-12">
                       <div class="search_bar_list">
                         <form>
-                          <input class="form-control" placeholder={this.state.query} onChange={this.handleInputChange} />
-                          <input type="submit" value="Search" onClick={() => this.handleSearchWithPage(1)} />
+                          <input
+                            class="form-control"
+                            placeholder={this.state.query}
+                            onChange={this.handleInputChange}
+                          />
+                          <input
+                            type="submit"
+                            value="Search"
+                            onClick={() => this.handleSearchWithPage(1)}
+                          />
                         </form>
                       </div>
                     </div>
@@ -122,20 +143,43 @@ class List extends React.Component {
               <div class="container margin_60_35" >
                 <div class="row">
                   <div class="col-md-12">
-                    {this.state.hits.map(p => <div class="strip_list wow fadeIn">
-                      <small>{p._source.url}</small>
-                      <a href={p._source.url}><h3>{p._source.title}</h3></a>
-                      <p>{trimByWord(p._source.content)}</p>
-                    </div>
+                    {this.state.hits.map(p =>
+                      <div class="strip_list wow fadeIn">
+                        <small>{p._source.url}</small>
+                        <a href={p._source.url}><h3>{p._source.title}</h3></a>
+                        <p>{trimByWord(p._source.content)}</p>
+                      </div>
                     )}
                     <nav aria-label="" class="add_top_20">
                       <ul class="pagination pagination-sm">
                         <li class={this.state.page <= 1 ? "page-item disabled" : "page-item"}>
-                          <button class="page-link" onClick={() => { this.handleSearchWithPage(this.state.page - 1); this.setState({ page: this.state.page - 1 }) }}>Previous</button>
+                          <button
+                            class="page-link"
+                            onClick={() => {
+                              this.handleSearchWithPage(this.state.page - 1);
+                            }}
+                          >
+                            Previous
+                          </button>
                         </li>
-                        {numberList().map(n => <li class={this.state.page === n ? "page-item active" : "page-item"}><button class="page-link" onClick={() => { this.handleSearchWithPage(n); this.setState({ page: n }) }}>{n}</button></li>)}
-                        <li class={this.state.page > Math.floor(this.state.total / 10) ? "page-item disabled" : "page-item"}>
-                          <button class="page-link" onClick={() => { this.handleSearchWithPage(this.state.page + 1); this.setState({ page: this.state.page + 1 }) }}>Next</button>
+                        {numberList().map(n =>
+                          <li class={this.state.page === n ? "page-item active" : "page-item"}>
+                            <button class="page-link" onClick={() => { this.handleSearchWithPage(n); this.setState({ page: n }) }}>
+                              {n}
+                            </button>
+                          </li>
+                        )}
+                        <li
+                          class={this.state.page > Math.floor(this.state.total / 10) ? "page-item disabled" : "page-item"}
+                        >
+                          <button
+                            class="page-link"
+                            onClick={() => {
+                              this.handleSearchWithPage(this.state.page + 1)
+                            }}
+                          >
+                            Next
+                          </button>
                         </li>
                       </ul>
                     </nav>
@@ -146,7 +190,7 @@ class List extends React.Component {
           </div>
           :
           <div id="preloader">
-            <div data-loader="circle-side"></div>
+            <div data-loader="circle-side" />
           </div>
         }
       </>
