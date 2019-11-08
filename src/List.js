@@ -97,10 +97,10 @@ class List extends React.Component {
         {this.state.ready ?
           <div>
 
-            <header class="static">
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm">
+            <header className="static">
+              <div className="container">
+                <div className="row">
+                  <div className="col-sm">
                     <div id="logo">
                       <img
                         src="img/Travela.png"
@@ -118,13 +118,13 @@ class List extends React.Component {
 
             <main>
               <div id="results">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="search_bar_list">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="search_bar_list">
                         <form>
                           <input
-                            class="form-control"
+                            className="form-control"
                             placeholder={this.state.query}
                             onChange={this.handleInputChange}
                           />
@@ -140,21 +140,34 @@ class List extends React.Component {
                 </div>
               </div>
 
-              <div class="container margin_60_35" >
-                <div class="row">
-                  <div class="col-md-12">
+              <div className="container margin_60_35" >
+                <div className="row">
+                  <div className="col-md-12">
                     {this.state.hits.map(p =>
-                      <div class="strip_list wow fadeIn">
-                        <small>{p._source.url}</small>
-                        <a href={p._source.url}><h3>{p._source.title}</h3></a>
-                        <p>{trimByWord(p._source.content)}</p>
+                      <div className="strip_list wow fadeIn">
+                        <small>
+                          {p._source.url}
+                        </small>
+                        <a href={p._source.url}>
+                          <h3>
+                            {p._source.title}
+                          </h3>
+                        </a>
+                        <p>
+                          {trimByWord(p._source.content)}
+                        </p>
                       </div>
                     )}
-                    <nav aria-label="" class="add_top_20">
-                      <ul class="pagination pagination-sm">
-                        <li class={this.state.page <= 1 ? "page-item disabled" : "page-item"}>
+                    <nav aria-label="" className="add_top_20">
+                      <ul className="pagination pagination-sm">
+                        <li className={
+                          this.state.page <= 1 ?
+                            "page-item disabled"
+                            :
+                            "page-item"}
+                        >
                           <button
-                            class="page-link"
+                            className="page-link"
                             onClick={() => {
                               this.handleSearchWithPage(this.state.page - 1);
                             }}
@@ -163,17 +176,32 @@ class List extends React.Component {
                           </button>
                         </li>
                         {numberList().map(n =>
-                          <li class={this.state.page === n ? "page-item active" : "page-item"}>
-                            <button class="page-link" onClick={() => { this.handleSearchWithPage(n); this.setState({ page: n }) }}>
+                          <li className={
+                            this.state.page === n ?
+                              "page-item active"
+                              :
+                              "page-item"}
+                          >
+                            <button
+                              className="page-link"
+                              onClick={() => {
+                                this.handleSearchWithPage(n)
+                              }}
+                            >
                               {n}
                             </button>
                           </li>
                         )}
                         <li
-                          class={this.state.page > Math.floor(this.state.total / 10) ? "page-item disabled" : "page-item"}
+                          className={
+                            this.state.page > Math.floor(this.state.total / 10) ?
+                              "page-item disabled"
+                              :
+                              "page-item"
+                          }
                         >
                           <button
-                            class="page-link"
+                            className="page-link"
                             onClick={() => {
                               this.handleSearchWithPage(this.state.page + 1)
                             }}
@@ -187,6 +215,7 @@ class List extends React.Component {
                 </div>
               </div>
             </main>
+
           </div>
           :
           <div id="preloader">
