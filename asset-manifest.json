@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/Travela/static/css/main.9b7ca25d.chunk.css",
+    "main.js": "/Travela/static/js/main.242c9848.chunk.js",
+    "main.js.map": "/Travela/static/js/main.242c9848.chunk.js.map",
+    "runtime-main.js": "/Travela/static/js/runtime-main.f3f1b2b1.js",
+    "runtime-main.js.map": "/Travela/static/js/runtime-main.f3f1b2b1.js.map",
+    "static/js/2.fec8cb6a.chunk.js": "/Travela/static/js/2.fec8cb6a.chunk.js",
+    "static/js/2.fec8cb6a.chunk.js.map": "/Travela/static/js/2.fec8cb6a.chunk.js.map",
+    "index.html": "/Travela/index.html",
+    "precache-manifest.a06c781680006636a17698a27f34c735.js": "/Travela/precache-manifest.a06c781680006636a17698a27f34c735.js",
+    "service-worker.js": "/Travela/service-worker.js",
+    "static/css/main.9b7ca25d.chunk.css.map": "/Travela/static/css/main.9b7ca25d.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f3f1b2b1.js",
+    "static/js/2.fec8cb6a.chunk.js",
+    "static/css/main.9b7ca25d.chunk.css",
+    "static/js/main.242c9848.chunk.js"
+  ]
+}
